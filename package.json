@@ -1,0 +1,54 @@
+{
+  "name": "coinalist",
+  "version": "0.0.1",
+  "description": "",
+  "author": "Savva Belloff",
+  "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ext .js,.ts",
+    "lint-fix": "eslint . --ext .js,.ts --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/savvaoff/coinalist.git"
+  },
+  "bugs": {
+    "url": "https://github.com/savvaoff/coinalist/issues"
+  },
+  "homepage": "https://github.com/savvaoff/coinalist#readme",
+  "keywords": [
+    "coin",
+    "token",
+    "crypto",
+    "cryptocurrency",
+    "fiat",
+    "ico",
+    "sto",
+    "exchange",
+    "trade",
+    "pump",
+    "dump"
+  ],
+  "dependencies": {
+    "autobahn": "^17.5.2",
+    "request": "^2.81.0",
+    "rxjs": "^6.0.0",
+    "ws": "^3.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.7",
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.10.0",
+    "eslint-plugin-typescript": "^0.12.0",
+    "pre-commit": "^1.2.2",
+    "typescript": "^2.8.3",
+    "typescript-eslint-parser": "^15.0.0"
+  }
+}
