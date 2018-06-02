@@ -214,7 +214,6 @@ export const ExchangeBinanceProvider = (Exchange: IExchangeConstructor) => class
 
   //   this._pusher.subscribe(channel).bind('data', data => {
   //     subject.next();
-  //     console.log('!!!!TRADES', market, data);
   //   });
 
   //   return subject;

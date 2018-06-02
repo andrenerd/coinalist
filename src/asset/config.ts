@@ -35,11 +35,11 @@ const config = {
       USD: 'usd',
       USDT: 'usdt'
     },
-    labels: {
+    labels: <any>{
       // auto populated
       // ex. btc: 'BTC' // capitalized
     },
-    list: [
+    list: <any>[
       // auto populated
       // ex. 'btc', ...
     ],

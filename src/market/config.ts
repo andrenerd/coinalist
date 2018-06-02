@@ -2,19 +2,19 @@ import configAsset from '../asset/config';
 
 const config = Object.assign({}, configAsset, {
   market: {
-    values: {
+    values: <any>{
       // auto populated
       // examples:
       // BTCUSDT: 'btcusdt,
       // ETHBTC: 'ethbtc',
     },
-    labels: {
+    labels: <any>{
       // auto populated
       // examples:
       // btcusdt: 'BTC:USDT',
       // ethbtc: 'ETH:BTC',
     },
-    exchanges: {
+    exchanges: <any>{
       // auto populated
       // example: / ethbtc: ['kraken', 'bittrex', 'poloniex'],
     },

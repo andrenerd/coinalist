@@ -75,8 +75,9 @@ export const ExchangeBinanceProvider = (Exchange: IExchangeConstructor) => class
       }
     );
 
+    // temp temp temp
     // https://www.binance.com/restapipub.html#user-content-user-data-stream-endpoints
-    this._request('POST', 'userDataStream').subscribe(data => {
+    this.options['trade'] && this._request('POST', 'userDataStream').subscribe(data => {
       let listenKey = data['listenKey'];
 
       let ws = new WebSocket(this._api.streamAccount(listenKey));

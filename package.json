@@ -1,26 +1,5 @@
 {
   "name": "coinalist",
-  "version": "0.0.1",
-  "description": "",
-  "author": "Savva Belloff",
-  "license": "ISC",
-  "main": "index.js",
-  "scripts": {
-    "lint": "eslint . --ext .js,.ts",
-    "lint-fix": "eslint . --ext .js,.ts --fix",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "pre-commit": [
-    "lint"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/savvaoff/coinalist.git"
-  },
-  "bugs": {
-    "url": "https://github.com/savvaoff/coinalist/issues"
-  },
-  "homepage": "https://github.com/savvaoff/coinalist#readme",
   "keywords": [
     "coin",
     "token",
@@ -34,6 +13,31 @@
     "pump",
     "dump"
   ],
+  "version": "0.0.2",
+  "description": "High level crypto exchange agnostyc framework for real time monitoring",
+  "author": "Savva Belloff (aka A. V.) <savva.belloff@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/savvaoff/coinalist.git"
+  },
+  "bugs": {
+    "url": "https://github.com/savvaoff/coinalist/issues"
+  },
+  "homepage": "https://github.com/savvaoff/coinalist#readme",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint . --ext .js,.ts",
+    "lint-fix": "eslint . --ext .js,.ts --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "pre-commit": {
+    "run": [
+      "precommit"
+    ],
+    "silent": true
+  },
   "dependencies": {
     "autobahn": "^17.5.2",
     "request": "^2.81.0",

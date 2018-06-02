@@ -21,6 +21,7 @@ export class Exchange implements IExchange {
 
   options: any = {
     trade: false,
+    transfer: false,
   };
 
   // experimental
@@ -75,6 +76,22 @@ export class Exchange implements IExchange {
       return output;
     }, {});
 
+    // experimental
+    // init methods (based on options)
+    if (!this.options['trade']) {
+      delete this.buy;
+      delete this.sell;
+      delete this.cancel;
+      delete this.move;
+      delete this.order;
+    }
+
+    if (!this.options['transfer']) {
+      delete this.transfer;
+      delete this.address;
+      delete this.balance;
+    }
+
     // init background processes
     marketTypes = <TMarketType[]> (marketTypes ? [].concat(marketTypes) : Object.keys(this._marketsAssetPairSymbols));
     marketTypes.forEach((itemMarketType, indexMarketType) => {
@@ -82,8 +99,12 @@ export class Exchange implements IExchange {
       this.markets.push(market);
 
       // RESERVED
-      // init accounts (in trade mode only)
-      // this.options['trade'] && market.assets().forEach((item, index) => {
+      // init orders (in trade mode only)
+      // this.options['trade'] && ...
+
+      // RESERVED
+      // init accounts (in transfer mode only)
+      // this.options['transfer'] && market.assets().forEach((item, index) => {
       //   if (!this.findAccount(item)) {
       //     let account = new Account(item);
       //     this.accounts.push(account);
