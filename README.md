@@ -1,5 +1,5 @@
 # Coinalist
-High level crypto exchange agnostic framework for real time monitoring, trading and analytics. Based on easy to use "streams" and "observables" paradigm, as specified and implemented by [ReactiveX](https://github.com/ReactiveX/rxjs).
+High level cryptocurrency exchange-agnostic framework for real time monitoring, trading and analytics. Based on easy to use "streams" and "observables" paradigm, as specified and implemented by [ReactiveX](https://github.com/ReactiveX/rxjs).
 
 
 Status: alpha
