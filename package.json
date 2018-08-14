@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/savvaoff/coinalist#readme",
   "main": "build/index.js",
+  "types": "build/index.d.ts",
   "scripts": {
     "build": "tsc",
     "lint": "eslint . --ext .js,.ts",
@@ -40,8 +41,8 @@
   },
   "dependencies": {
     "autobahn": "^17.5.2",
-    "request": "^2.81.0",
-    "rxjs": "^6.0.0",
+    "request": "^2.88.0",
+    "rxjs": "~6.0.0",
     "ws": "^3.2.0"
   },
   "devDependencies": {

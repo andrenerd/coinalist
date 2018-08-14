@@ -300,11 +300,11 @@ export class Exchange implements IExchange {
 import { ExchangeBinanceProvider } from './providers/binance';
 // import { ExchangeBitstampProvider } from './providers/bitstamp';
 // import { ExchangeBittrexProvider } from './providers/bittrex';
-// import { ExchangeKrakenProvider } from './providers/kraken';
+import { ExchangeKrakenProvider } from './providers/kraken';
 // import { ExchangePoloniexProvider } from './providers/poloniex';
 
 export const ExchangeBinance = ExchangeBinanceProvider(Exchange);
 // export const ExchangeBitstamp = ExchangeBitstampProvider(Exchange);
 // export const ExchangeBittrex = ExchangeBittrexProvider(Exchange);
-// export const ExchangeKraken = ExchangeKrakenProvider(Exchange);
+export const ExchangeKraken = ExchangeKrakenProvider(Exchange);
 // export const ExchangePoloniex = ExchangePoloniexProvider(Exchange);

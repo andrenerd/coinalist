@@ -1,4 +1,4 @@
-import { Observable, ReplaySubject } from 'rxjs';
+import { Observable, ReplaySubject, Subscription } from 'rxjs';
 
 import { TAsset } from '../asset/interfaces';
 import { TMarketType, TMarketSide } from '../market/interfaces';
@@ -47,7 +47,7 @@ export class Order implements IOrder {
     this['_observable'] = new ReplaySubject(1); // buffer last value
   }
 
-  subscribe(onNext: Function, onError?: Function, onComplete?: Function, ...props) {
+  subscribe(onNext: Function, onError?: Function, onComplete?: Function, ...props): Subscription {
     let on = Array.from(arguments).map(item => item ? item.bind(this) : item);
     return this._observable.subscribe(...on);
   }

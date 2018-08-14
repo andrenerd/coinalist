@@ -1,15 +1,46 @@
 import config from './config';
 
-import * as asset from './asset';
-import * as market from './market';
-import * as account from './account';
-import * as order from './order';
-import * as exchange from './exchange';
+import { TAsset } from './asset/interfaces';
+import { TMarketType, TMarketSide, TMarketBookOrder } from './market/interfaces';
+import { IMarket, IMarketBooks, IMarketBook } from './market/interfaces';
+import { TAccountType, TAccountAddress, TTransferId, TTransferType, TTransferStatus } from './account/interfaces';
+import { IAccount, ITransfer } from './account/interfaces';
+import { TOrderId, TOrderOriginId, TOrderStatus, IOrder } from './order/interfaces';
+import { TExchangeName, IExchange } from './exchange/interfaces';
 
-module.exports.config = config;
+// import {} from './asset';
+import  { Market, MarketBook, Rate } from './market';
+import { Account, Transfer } from './account';
+import { Order } from './order';
+import {
+  Exchange,
+  ExchangeBinance,
+  ExchangeKraken,
+} from './exchange';
 
-module.exports.asset = asset;
-module.exports.market = market;
-module.exports.account = account;
-module.exports.order = order;
-module.exports.exchange = exchange;
+export {
+  TAsset,
+  TMarketType, TMarketSide, TMarketBookOrder,
+  IMarket, IMarketBooks, IMarketBook,
+  TAccountType, TAccountAddress, TTransferId, TTransferType, TTransferStatus,
+  IAccount, ITransfer,
+  TOrderId, TOrderOriginId, TOrderStatus, IOrder,
+  TExchangeName, IExchange,
+}
+
+export {
+  config,
+
+  Market,
+  MarketBook,
+  Rate,
+
+  Account,
+  Transfer,
+
+  Order,
+
+  Exchange,
+  ExchangeBinance,
+  ExchangeKraken,
+}

@@ -1,4 +1,4 @@
-import { Observable, ReplaySubject } from 'rxjs';
+import { Observable, ReplaySubject, Subscription } from 'rxjs';
 
 import { TAccountType, TAccountAddress, TTransferId, TTransferType, TTransferStatus } from './interfaces';
 import { IAccount, ITransfer } from './interfaces';
@@ -22,7 +22,7 @@ export class Account implements IAccount {
   }
 
   // not in use
-  subscribe(onNext: Function, ...props) {
+  subscribe(onNext: Function, ...props): Subscription {
     return this._observable.subscribe(<any>onNext.bind(this));
   }
 }
