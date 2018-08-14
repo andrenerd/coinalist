@@ -131,12 +131,17 @@ export class MarketBook implements IMarketBook {
   }
 
   reset(orders: TMarketBookOrder | TMarketBookOrder[]): MarketBook {
-    orders = Array.isArray(orders) ? [orders] : orders;
+    orders = Array.isArray(orders) ? orders : [orders];
 
+    const oldTipOrder = this.orders[0] || [];
+    const newTipOrder = orders[0] || [];
+
+    // TODO: temp temp temp / trigger only on non empty book 
+    // if book's empty or invalid market should be marked as "closed"?
     const isNext = (
-      orders[0][RATE] == this.orders[0][RATE] &&
-      orders[0][AMOUNT] == this.orders[0][AMOUNT]
-    )
+      newTipOrder[RATE] != oldTipOrder[RATE] ||
+      newTipOrder[AMOUNT] != oldTipOrder[AMOUNT]
+    ); // is "tip" order updated?
 
     this.orders = [].concat(orders);
     isNext && this._observable.next(this); // temporal

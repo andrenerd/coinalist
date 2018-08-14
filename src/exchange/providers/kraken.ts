@@ -353,7 +353,7 @@ export const ExchangeKrakenProvider = (Exchange: IExchangeConstructor) => class 
         data['bids']
           .map(itemData => <TMarketBookOrder>
             // parse orders
-            [parseFloat(dataOrder[0]), parseFloat(dataOrder[1])];
+            [parseFloat(itemData[0]), parseFloat(itemData[1])]
           ).filter(itemBookOrder =>
             // filter out "self" orders from the market order books
             !this.findOrderByBookOrder(BUY, itemBookOrder)
@@ -364,7 +364,7 @@ export const ExchangeKrakenProvider = (Exchange: IExchangeConstructor) => class 
         data['asks']
           .map(itemData => <TMarketBookOrder>
             // parse orders
-            [parseFloat(dataOrder[0]), parseFloat(dataOrder[1])];
+            [parseFloat(itemData[0]), parseFloat(itemData[1])]
           ).filter(itemBookOrder =>
             // filter out "self" orders from the market order books
             !this.findOrderByBookOrder(SELL, itemBookOrder)
