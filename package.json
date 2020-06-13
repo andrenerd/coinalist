@@ -15,7 +15,7 @@
   ],
   "version": "0.0.2",
   "description": "High level crypto exchange agnostyc framework for real time monitoring",
-  "author": "Savva Belloff (aka A. V.) <savva.belloff@gmail.com>",
+  "author": "Andrei Vasin (aka Savva) <andreid.31415@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
