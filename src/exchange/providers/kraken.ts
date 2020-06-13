@@ -19,7 +19,7 @@ const { asset: {values: A}, market: {values: M} } = config;
 
 // https://www.kraken.com/help/api
 // https://support.kraken.com/hc/en-us/articles/205893708-What-is-the-minimum-order-size-
-export const ExchangeBinanceProvider = (Exchange: IExchangeConstructor) => class ExchangeKraken extends Exchange implements IExchange {
+export const ExchangeKrakenProvider = (Exchange: IExchangeConstructor) => class ExchangeKraken extends Exchange implements IExchange {
   name = config.exchange.values.KRAKEN;
 
   _api = {
@@ -349,33 +349,27 @@ export const ExchangeBinanceProvider = (Exchange: IExchangeConstructor) => class
     this.__subscribeBooks(market).subscribe(data => {
       if (!data) { return; } // is it in use?
 
-      let dataOrders = [];
+      data['bids'] && market.books[BUY].reset(
+        data['bids']
+          .map(itemData => <TMarketBookOrder>
+            // parse orders
+            [parseFloat(itemData[0]), parseFloat(itemData[1])]
+          ).filter(itemBookOrder =>
+            // filter out "self" orders from the market order books
+            !this.findOrderByBookOrder(BUY, itemBookOrder)
+          )
+      );
 
-      data['bids'] && data['bids'].forEach(dataOrder => dataOrders.push({
-        side: BUY,
-        data: [dataOrder[0], dataOrder[1]],
-      }));
-
-      data['asks'] && data['asks'].forEach(dataOrder => dataOrders.push({
-        side: SELL,
-        data: [dataOrder[0], dataOrder[1]],
-      }));
-
-      let indexFirst = {BUY: true, SELL: true};
-      dataOrders.forEach(item => {
-        let book = market.books[item.side];
-        let bookOrder: TMarketBookOrder = [parseFloat(item.data[RATE]), parseFloat(item.data[AMOUNT])];
-
-        // filter out "self" orders from the market order books
-        if (this.findOrderByBookOrder(item.side, bookOrder)) { return; }
-
-        // get order with 0.0 amount to remove it from the list
-        bookOrder[AMOUNT] ? book.add(bookOrder, indexFirst[item.side]) : book.remove(bookOrder);
-
-        // to untrigger book reset
-        indexFirst[item.side] = false;
-      });
-
+      data['asks'] && market.books[SELL].reset(
+        data['asks']
+          .map(itemData => <TMarketBookOrder>
+            // parse orders
+            [parseFloat(itemData[0]), parseFloat(itemData[1])]
+          ).filter(itemBookOrder =>
+            // filter out "self" orders from the market order books
+            !this.findOrderByBookOrder(SELL, itemBookOrder)
+          )
+      );
     }, err => {});
 
     return subject;
@@ -620,7 +614,7 @@ export const ExchangeBinanceProvider = (Exchange: IExchangeConstructor) => class
   _getSignature(url: string, body: string = '', nonce: number): string {
     // https://github.com/nothingisdead/npm-kraken-api/blob/master/kraken.js#L19
     const hash= crypto.createHash('sha256');
-    const hmac = crypto.createHmac('sha512', new Buffer(this._api.secret, 'base64'));
+    const hmac = crypto.createHmac('sha512', new Buffer(this._api.secret || '', 'base64'));
 
     let hashBody = hash.update(nonce + body).digest('binary');
     return hmac.update(url + hashBody, 'binary').digest('base64');

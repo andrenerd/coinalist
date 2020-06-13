@@ -1,4 +1,4 @@
-import { Observable, ReplaySubject } from 'rxjs';
+import { Observable, ReplaySubject, Subscription } from 'rxjs';
 
 import { TAsset } from '../asset/interfaces';
 import { TMarketType, TMarketSide, TMarketBookOrder } from './interfaces';
@@ -33,7 +33,7 @@ export class Market implements IMarket {
   }
 
   // not in use
-  subscribe(onNext: Function, ...props) {
+  subscribe(onNext: Function, ...props): Subscription {
     return this._observable.subscribe(<any>onNext.bind(this));
   }
 
@@ -104,8 +104,8 @@ export class MarketBook implements IMarketBook {
     return this._observable.subscribe(<any>onNext.bind(this));
   }
 
-  add(order: TMarketBookOrder, reset: boolean = false): MarketBook {
-    let orders = reset ? [] : [].concat(this.orders);
+  add(order: TMarketBookOrder): MarketBook {
+    let orders = [].concat(this.orders);
     let index = orders.findIndex((item: TMarketBookOrder) =>
       Rate.tip(this.side, item[RATE], order[RATE]) == order[RATE]
     );
@@ -118,8 +118,8 @@ export class MarketBook implements IMarketBook {
     return this;
   }
 
-  remove(order: TMarketBookOrder, reset: boolean = false): MarketBook {
-    let orders = reset ? [] : [].concat(this.orders);
+  remove(order: TMarketBookOrder): MarketBook {
+    let orders = [].concat(this.orders);
 
     this.orders = orders.filter((item: TMarketBookOrder) => item[RATE] != order[RATE]);
 
@@ -127,6 +127,24 @@ export class MarketBook implements IMarketBook {
     // if book's empty or invalid market should be marked as "closed"?
     // !this.orders[0] && this._observable.next(this); // temporal
     this.orders[0] != orders[0] && this._observable.next(this); // temporal
+    return this;
+  }
+
+  reset(orders: TMarketBookOrder | TMarketBookOrder[]): MarketBook {
+    orders = Array.isArray(orders) ? orders : [orders];
+
+    const oldTipOrder = this.orders[0] || [];
+    const newTipOrder = orders[0] || [];
+
+    // TODO: temp temp temp / trigger only on non empty book 
+    // if book's empty or invalid market should be marked as "closed"?
+    const isNext = (
+      newTipOrder[RATE] != oldTipOrder[RATE] ||
+      newTipOrder[AMOUNT] != oldTipOrder[AMOUNT]
+    ); // is "tip" order updated?
+
+    this.orders = [].concat(orders);
+    isNext && this._observable.next(this); // temporal
     return this;
   }
 }

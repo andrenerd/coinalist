@@ -7,6 +7,7 @@ import { TMarketType, TMarketSide, TMarketBookOrder, IMarket } from '../../marke
 import { TExchangeName, IExchange, IExchangeConstructor } from '../interfaces';
 
 import config from '../config';
+import { Account, Transfer } from '../../account';
 import { Market } from '../../market';
 import { Order } from '../../order';
 
@@ -17,7 +18,7 @@ const { asset: {values: A}, market: {values: M} } = config;
 
 // https://www.bitstamp.net/api/
 // https://www.bitstamp.net/websocket/
-export const ExchangeBinanceProvider = (Exchange: IExchangeConstructor) => class ExchangeKraken extends Exchange implements IExchange {
+export const ExchangeBitstampProvider = (Exchange: IExchangeConstructor) => class ExchangeKraken extends Exchange implements IExchange {
   name = config.exchange.values.BITSTAMP;
 
   _api = {
