@@ -13,18 +13,18 @@
     "pump",
     "dump"
   ],
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "High level crypto exchange agnostyc framework for real time monitoring",
   "author": "Andrei Vasin (aka Savva) <andreid.31415@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/savvaoff/coinalist.git"
+    "url": "git+https://github.com/andrenerd/coinalist.git"
   },
   "bugs": {
-    "url": "https://github.com/savvaoff/coinalist/issues"
+    "url": "https://github.com/andrenerd/coinalist/issues"
   },
-  "homepage": "https://github.com/savvaoff/coinalist#readme",
+  "homepage": "https://github.com/andrenerd/coinalist#readme",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
